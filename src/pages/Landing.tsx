@@ -251,22 +251,6 @@ function Hero() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.5}>
-            <div className="mt-10 sm:mt-14 grid grid-cols-3 gap-3 sm:gap-6 max-w-md">
-              {[
-                { n: 500, s: "+", l: "متدرب" },
-                { n: 12, s: "أسبوع", l: "تحول" },
-                { n: 98, s: "%", l: "التزام" },
-              ].map((item, i) => (
-                <div key={i} className="min-w-0 border-t border-white/10 pt-3 sm:pt-4">
-                  <div className="text-xl sm:text-2xl md:text-3xl font-black text-gradient whitespace-nowrap leading-tight">
-                    <Counter to={item.n} suffix={item.s} />
-                  </div>
-                  <div className="text-[10px] sm:text-xs text-white/50 mt-1">{item.l}</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
         </div>
 
         {/* Image col — large coach photo w/ dark gradient overlay */}
@@ -332,7 +316,7 @@ function Marquee() {
 function Stats() {
   const stats = [
     { icon: Trophy, n: 500, s: "+", l: "متدرب حقق هدفه" },
-    { icon: Zap, n: 12000, s: "kg", l: "دهون تم حرقها" },
+    { icon: Zap, n: 12, s: "أسبوع", l: "تحول" },
     { icon: Target, n: 98, s: "%", l: "نسبة الالتزام" },
     { icon: Flame, n: 5, s: "سنوات", l: "خبرة فعلية" },
   ];
