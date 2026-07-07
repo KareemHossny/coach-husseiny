@@ -15,4 +15,5 @@ export const ASSETS = {
   c1: "https://res.cloudinary.com/dwdasucfu/image/upload/v1783300459/552244712_17961498815988676_8846136227449463770_n_omtx3y.jpg",
   c3: "https://res.cloudinary.com/dwdasucfu/image/upload/v1783300460/560905979_18016678715607040_6421616303268506974_n_qrgvho.jpg",
   c4: "https://res.cloudinary.com/dwdasucfu/image/upload/v1783300460/569179453_18080721299031460_4133216048507348014_n_kyx9jj.jpg",
+  logo: "https://res.cloudinary.com/dwdasucfu/image/upload/v1783402239/ChatGPT_Image_Jul_7_2026_08_30_02_AM_mpojwv.png",
 } as const;
