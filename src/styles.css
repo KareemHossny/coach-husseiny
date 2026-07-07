@@ -222,3 +222,35 @@
 @utility animate-marquee-rev {
   animation: marquee-rev 35s linear infinite;
 }
+
+/* ------- Animated ambient gradient ------- */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(4%, 6%) scale(1.08) rotate(1deg);
+  }
+  66% {
+    transform: translate(-4%, -3%) scale(0.94) rotate(-1deg);
+  }
+}
+
+@utility animate-glow {
+  animation: gradient-shift 12s ease-in-out infinite;
+}
+
+/* ------- WhatsApp pulse ring ------- */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 oklch(0.72 0.19 45 / 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 24px oklch(0.72 0.19 45 / 0);
+  }
+}
+
+@utility animate-pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
+}

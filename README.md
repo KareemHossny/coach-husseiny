@@ -21,16 +21,16 @@ A production-ready landing page for certified online coach Mohammed Husseiny. Fu
 
 ## Tech Stack
 
-| Layer | Choice |
-|-------|--------|
-| Framework | React 19 + TypeScript |
-| Bundler | Vite 8 |
-| Routing | React Router v6 |
-| Styling | Tailwind CSS v4 |
+| Layer         | Choice                       |
+| ------------- | ---------------------------- |
+| Framework     | React 19 + TypeScript        |
+| Bundler       | Vite 8                       |
+| Routing       | React Router v6              |
+| Styling       | Tailwind CSS v4              |
 | UI Components | shadcn/ui (Radix primitives) |
-| Animation | Framer Motion |
-| Icons | Lucide React |
-| Image CDN | Cloudinary |
+| Animation     | Framer Motion                |
+| Icons         | Lucide React                 |
+| Image CDN     | Cloudinary                   |
 
 ## Getting Started
 
@@ -43,13 +43,13 @@ Opens at `http://localhost:5173`.
 
 ## Commands
 
-| Command | Purpose |
-|---------|---------|
-| `npm run dev` | Start development server |
-| `npm run build` | Production build to `dist/` |
+| Command           | Purpose                          |
+| ----------------- | -------------------------------- |
+| `npm run dev`     | Start development server         |
+| `npm run build`   | Production build to `dist/`      |
 | `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format with Prettier |
+| `npm run lint`    | Run ESLint                       |
+| `npm run format`  | Format with Prettier             |
 
 ## Deploy
 

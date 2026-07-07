@@ -33,6 +33,50 @@ const INSTAGRAM_URL = "https://www.instagram.com/mo.husseiny/";
 const YOUTUBE_URL = "https://www.youtube.com/@mo.husseiny";
 const THREADS_URL = "https://www.threads.com/@mo.husseiny";
 
+/* ---------------- progress bar ---------------- */
+function ProgressBar() {
+  const { scrollYProgress } = useScroll();
+  return (
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-[3px] z-[60] bg-gradient-to-r from-primary via-accent to-primary origin-left"
+      style={{ scaleX: scrollYProgress }}
+    />
+  );
+}
+
+/* ---------------- floating WhatsApp ---------------- */
+function WhatsAppFloatingButton() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 600);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <motion.a
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noopener"
+      initial={{ opacity: 0, scale: 0 }}
+      animate={visible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+      transition={{ duration: 0.35 }}
+      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-primary text-white grid place-items-center shadow-glow hover:scale-110 transition-transform animate-pulse-ring"
+    >
+      <MessageCircle className="w-7 h-7" />
+    </motion.a>
+  );
+}
+
+/* ---------------- section divider ---------------- */
+function SectionDivider() {
+  return (
+    <div className="relative flex justify-center py-6 md:py-10">
+      <div className="w-32 h-[2px] rounded-full bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+    </div>
+  );
+}
+
 /* ---------------- helpers ---------------- */
 function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -95,18 +139,29 @@ export default function Landing() {
 
   return (
     <main className="min-h-dvh bg-background text-foreground overflow-x-hidden">
+      <ProgressBar />
       <Nav />
       <Hero />
+      <SectionDivider />
       <Marquee />
+      <SectionDivider />
       <Stats />
+      <SectionDivider />
       <About />
+      <SectionDivider />
       <Services />
+      <SectionDivider />
       <Transforms />
+      <SectionDivider />
       <Testimonials />
+      <SectionDivider />
       <Pricing />
+      <SectionDivider />
       <FAQ />
+      <SectionDivider />
       <FinalCTA />
       <Footer />
+      <WhatsAppFloatingButton />
     </main>
   );
 }
@@ -204,9 +259,12 @@ function Hero() {
   return (
     <section ref={ref} className="relative lg:min-h-[100svh] pt-20 md:pt-24 overflow-hidden">
       {/* Ambient bg glows */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-primary/20 blur-[120px]" />
-        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-accent/15 blur-[120px]" />
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-primary/20 blur-[120px] animate-glow" />
+        <div
+          className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-accent/15 blur-[120px] animate-glow"
+          style={{ animationDelay: "-6s" }}
+        />
         <div className="absolute inset-0 noise-bg opacity-40" />
       </div>
 
@@ -250,7 +308,6 @@ function Hero() {
               </a>
             </div>
           </Reveal>
-
         </div>
 
         {/* Image col — large coach photo w/ dark gradient overlay */}
@@ -296,7 +353,7 @@ function Marquee() {
   ];
   const line = [...words, ...words];
   return (
-    <div className="border-y border-white/10 bg-primary/5 py-6 overflow-hidden">
+    <div className="bg-primary/5 py-6 overflow-hidden">
       <div className="flex gap-8 sm:gap-12 whitespace-nowrap animate-marquee-fast">
         {line.map((w, i) => (
           <div
@@ -321,11 +378,11 @@ function Stats() {
     { icon: Flame, n: 5, s: "سنوات", l: "خبرة فعلية" },
   ];
   return (
-    <section className="py-16 md:py-28 lg:py-40 border-b border-white/5">
+    <section className="py-16 md:py-28 lg:py-40">
       <div className="max-w-7xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
         {stats.map((s, i) => (
-          <Reveal key={i} delay={i * 0.08}>
-            <div className="group relative p-6 md:p-8 rounded-2xl border border-white/10 bg-card/40 hover:border-primary/50 hover:bg-card/70 transition-all hover:-translate-y-1 overflow-hidden">
+          <Reveal key={i} delay={i * 0.13}>
+            <div className="group relative p-6 md:p-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:border-primary/50 hover:bg-white/[0.06] transition-all hover:-translate-y-1 overflow-hidden">
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-br from-primary/10 to-transparent transition-opacity" />
               <s.icon className="w-8 h-8 text-primary mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform" />
               <div className="text-xl sm:text-2xl md:text-5xl font-black text-white overflow-hidden">
@@ -443,7 +500,7 @@ function Services() {
     { icon: Utensils, t: "بدائل ذكية", d: "أكل خارج البيت؟ سفر؟ عندنا حل." },
   ];
   return (
-    <section id="services" className="py-16 md:py-28 lg:py-40 relative border-t border-white/5">
+    <section id="services" className="py-16 md:py-28 lg:py-40 relative">
       <div className="max-w-7xl mx-auto px-5">
         <Reveal>
           <span className="text-primary font-black text-xs md:text-sm tracking-[0.3em]">
@@ -457,8 +514,8 @@ function Services() {
         </Reveal>
         <div className="mt-10 md:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {items.map((it, i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <div className="group relative h-full p-8 rounded-2xl border border-white/10 bg-gradient-to-br from-card to-card/30 hover:border-primary/50 hover:-translate-y-1 transition-all overflow-hidden">
+            <Reveal key={i} delay={i * 0.09}>
+              <div className="group relative h-full p-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl hover:border-primary/50 hover:bg-white/[0.06] hover:-translate-y-1 transition-all overflow-hidden">
                 <div className="absolute top-4 left-4 text-6xl font-black text-white/5 group-hover:text-primary/25 transition-colors">
                   0{i + 1}
                 </div>
@@ -514,10 +571,7 @@ function InfiniteSwiper({
 function Transforms() {
   const images = [ASSETS.tr1, ASSETS.tr2, ASSETS.tr3, ASSETS.tr4, ASSETS.tr5];
   return (
-    <section
-      id="transforms"
-      className="py-16 md:py-28 lg:py-40 border-t border-white/5 relative overflow-hidden"
-    >
+    <section id="transforms" className="py-16 md:py-28 lg:py-40 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-5">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-16">
           <Reveal>
@@ -547,10 +601,7 @@ function Transforms() {
 function Testimonials() {
   const chats = [ASSETS.c1, ASSETS.c3, ASSETS.c4];
   return (
-    <section
-      id="testimonials"
-      className="py-16 md:py-28 lg:py-40 border-t border-white/5 relative overflow-hidden"
-    >
+    <section id="testimonials" className="py-16 md:py-28 lg:py-40 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 mb-10 md:mb-14">
         <Reveal>
           <span className="text-primary font-black text-xs md:text-sm tracking-[0.3em]">
@@ -614,7 +665,7 @@ function Pricing() {
     },
   ];
   return (
-    <section id="pricing" className="py-16 md:py-28 lg:py-40 border-t border-white/5 relative">
+    <section id="pricing" className="py-16 md:py-28 lg:py-40 relative">
       <div className="max-w-7xl mx-auto px-5">
         <Reveal>
           <div className="text-center mb-16">
@@ -629,9 +680,9 @@ function Pricing() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {plans.map((p, i) => (
-            <Reveal key={i} delay={i * 0.1}>
+            <Reveal key={i} delay={i * 0.14}>
               <div
-                className={`relative h-full p-8 rounded-[2rem] border transition-all hover:-translate-y-2 ${p.featured ? "border-primary/60 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent md:scale-105 shadow-glow" : "border-white/10 bg-card/40 backdrop-blur hover:border-white/30"}`}
+                className={`relative h-full p-8 rounded-[2rem] border transition-all hover:-translate-y-2 ${p.featured ? "border-primary/60 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent backdrop-blur-xl md:scale-105 shadow-glow" : "border-white/10 bg-white/[0.03] backdrop-blur-xl hover:border-white/30 hover:bg-white/[0.06]"}`}
               >
                 {p.featured && (
                   <div className="absolute -top-4 right-8 px-4 py-1.5 rounded-full bg-gradient-primary text-white text-xs font-black shadow-glow flex items-center gap-1.5">
@@ -703,7 +754,7 @@ function FAQ() {
   ];
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="py-16 md:py-28 lg:py-40 border-t border-white/5">
+    <section id="faq" className="py-16 md:py-28 lg:py-40">
       <div className="max-w-3xl mx-auto px-5">
         <Reveal>
           <span className="text-primary font-black text-xs md:text-sm tracking-[0.3em]">
@@ -750,11 +801,8 @@ function FAQ() {
 /* ---------------- Final CTA ---------------- */
 function FinalCTA() {
   return (
-    <section
-      id="cta"
-      className="relative py-20 md:py-40 lg:py-52 overflow-hidden border-t border-white/5"
-    >
-      <div className="absolute inset-0">
+    <section id="cta" className="relative py-20 md:py-40 lg:py-52 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden">
         <img
           src={ASSETS.coach4}
           alt=""
@@ -762,6 +810,11 @@ function FinalCTA() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
         <div className="absolute inset-0 noise-bg opacity-40" />
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-primary/15 blur-[120px] animate-glow" />
+        <div
+          className="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-accent/10 blur-[100px] animate-glow"
+          style={{ animationDelay: "-6s" }}
+        />
       </div>
       <div className="relative max-w-4xl mx-auto px-5 text-center">
         <Reveal delay={0.1}>
